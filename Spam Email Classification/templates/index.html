@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spam Email Classifier</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <article class="row mt-2">
+      <div class="col-sm-9 m-auto">
+        <div class="shadow-sm p-4 mb-4 bg-white">
+          <section>
+            <div class="card bg-danger text-white text-center lead py-2">
+              Spam Email Classifier
+              <i class="material-icons" style="font-size:36px">email</i>
+            </div>
+          </section>
+          <section class="my-3">
+            <div class="form-group">
+              <div class="card bg-info text-white text-center lead py-2 my-2">
+                Enter email below
+              </div>
+              <textarea class="form-control" rows="5" id="email"></textarea>
+            </div>
+            <div class="text-center">
+              <button type="button" class="btn btn-info mx-1" id="classify">Classify</button>
+              <button type="button" class="btn btn-danger mx-1" id="clear">Clear</button>
+            </div>
+          </section>
+          <section  id="result">
+            <div class="card bg-dark text-white text-center py-2 my-2">
+              <header class="lead">
+                Results
+              </header>
+              <div class="py-3" style="font-size: 30px;">
+                No email entered
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer class="text-center py-3 text-dark">
+    markbirds &copy; 2020
+  </footer>
+
+  <script>
+    $(document).ready(function(){
+      $('#classify').click(function(){
+        email = $('#email').val().trim()
+        if(email){
+          $.post('/classify',{
+            'email':email
+          },function(data,status){
+            var prediction = data['prediction'];
+            if(prediction=="0"){
+              output = 
+              '<div class="card bg-success text-white text-center py-2 my-2">'+
+                '<header class="lead">'+
+                  'Results'+
+                '</header>'+
+                '<div class="py-3" style="font-size: 30px;">'+
+                  'Nice! That is not a spam.'+
+                '</div>'+
+              '</div>';
+              $('#result').html(output);
+            }else{
+              output = 
+              '<div class="card bg-danger text-white text-center py-2 my-2">'+
+                '<header class="lead">'+
+                  'Results'+
+                '</header>'+
+                '<div class="py-3" style="font-size: 30px;">'+
+                  'Wait! That is a spam!'+
+                '</div>'+
+              '</div>';
+              $('#result').html(output);
+            }
+          });
+        }else{
+          output = 
+            '<div class="card bg-dark text-white text-center py-2 my-2">'+
+              '<header class="lead">'+
+                'Results'+
+              '</header>'+
+              '<div class="py-3" style="font-size: 30px;">'+
+                'No email entered'+
+              '</div>'+
+            '</div>';
+          $('#result').html(output);
+        }
+      });
+      $('#clear').click(function(){
+        output = 
+            '<div class="card bg-dark text-white text-center py-2 my-2">'+
+              '<header class="lead">'+
+                'Results'+
+              '</header>'+
+              '<div class="py-3" style="font-size: 30px;">'+
+                'No email entered'+
+              '</div>'+
+            '</div>';
+          $('#result').html(output);
+        $('#email').val('')
+      });
+    });
+  </script>
+</body>
+</html>
