@@ -1,16 +1,20 @@
 ## Anime Recommendation System
 
 ### Recommendation using Pearson Correlation
-https://github.com/markbirds/Anime-Recommendation-System/blob/master/anime_recommendation_pearson_r.ipynb
+https://github.com/markbirds/Anime-Recommendation-System/blob/master/model/anime_recommendation_pearson_r.ipynb
 
 ### Recommendation using Nearest Neighbors
-https://github.com/markbirds/Anime-Recommendation-System/blob/master/anime_recommendation_nearest_neighbors.ipynb
+https://github.com/markbirds/Anime-Recommendation-System/blob/master/model/anime_recommendation_nearest_neighbors.ipynb
 
 ### Dataset
 ```
 https://www.kaggle.com/CooperUnion/anime-recommendations-database
 ```
 
-### Sample (The app can't be uploaded to github because of its size.)
+### Sample
 
-![sample](images/sample.gif)
+![sample](server/gif/sample.gif)
+
+### License
+
+This project is licensed under the terms of the [MIT License](LICENSE).
